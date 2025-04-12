@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Tutorial{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Welcome to the Resume Screening System Tutorial</h1>
+    <p>This system helps you screen resumes by extracting key information from uploaded files.</p>
+    <h3>How to Upload Resumes</h3>
+    <ol>
+        <li>Click the "Upload Resumes" link in the navigation bar.</li>
+        <li>Fill in the details and select one or more resume files (accepted formats: .txt, .pdf, .doc, .docx).</li>
+        <li>Click the "Upload Resumes" button to upload.</li>
+    </ol>
+    <h3>Understanding the Screening Process</h3>
+    <p>The system extracts the "experience" section by splitting the resume text on "experience" (case‑insensitive) and counts the occurrences of "company name" as a proxy for work experiences. Collaboration and adaptability scores are computed by matching common keywords throughout the resume. The overall score is the sum of these scores.</p>
+    <h3>Navigation</h3>
+    <p>You can use the navigation bar to move between uploading resumes, viewing top candidates, and this tutorial.</p>
+    <div class="mt-4">
+        <a href="{% url 'upload_resume' %}" class="btn btn-primary">Upload Resumes</a>
+        <a href="{% url 'top_candidates' %}" class="btn btn-secondary">View Top Candidates</a>
+    </div>
+</div>
+{% endblock %}

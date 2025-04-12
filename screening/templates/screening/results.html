@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Top Candidates{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Top Candidates</h2>
+    <a href="{% url 'upload_resume' %}" class="btn btn-secondary mb-3">Upload Resumes</a>
+    <form method="get" class="row g-3 mb-4">
+        <div class="col-md-4">
+            <label for="category" class="form-label">Category:</label>
+            <select name="category" id="category" class="form-select">
+                <option value="">All</option>
+                {% for code, name in job_categories %}
+                    <option value="{{ code }}" {% if selected_category == code %}selected{% endif %}>{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="count" class="form-label">Show Top (per page):</label>
+            <input type="number" name="count" id="count" class="form-control" min="1" max="100" value="{{ selected_count|default:5 }}">
+        </div>
+        <div class="col-md-4 align-self-end">
+            <button type="submit" class="btn btn-primary">View</button>
+        </div>
+    </form>
+    
+    {% if results %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Job Category</th>
+                    <th>Organization</th>
+                    <th>Location</th>
+                    <th>Experience</th>
+                    <th>Collaboration</th>
+                    <th>Adaptability</th>
+                    <th>Overall</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                    <tr>
+                        <td>{{ result.resume.full_name }}</td>
+                        <td>{{ result.resume.job_category }}</td>
+                        <td>{{ result.organization }}</td>
+                        <td>{{ result.location }}</td>
+                        <td>{{ result.skill_score }}</td>
+                        <td>{{ result.collaboration_score }}</td>
+                        <td>{{ result.adaptability_score }}</td>
+                        <td>{{ result.overall_score }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if results.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ results.previous_page_number }}&category={{ selected_category }}&count={{ selected_count }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo; Previous</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo; Previous</span>
+                    </li>
+                {% endif %}
+                
+                <li class="page-item disabled">
+                    <span class="page-link">Page {{ results.number }} of {{ results.paginator.num_pages }}</span>
+                </li>
+                
+                {% if results.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ results.next_page_number }}&category={{ selected_category }}&count={{ selected_count }}" aria-label="Next">
+                            <span aria-hidden="true">Next &raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Next &raquo;</span>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</div>
+{% endblock %}
