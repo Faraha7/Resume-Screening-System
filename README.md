@@ -1,16 +1,1 @@
-Resume Screening System
-
-Overview
-The Resume Screening System is a web application designed to automate the initial screening process of resumes for job applications. This system utilizes machine learning models to analyze and rank resumes based on predefined criteria, helping recruiters and hiring managers efficiently shortlist candidates.
-
-Features
-
-Automated Resume Parsing: Extracts relevant information from resumes, such as skills, experience, and education.
-
-Machine Learning Models: Uses AI models to analyze resumes and predict candidate suitability.
-
-User Authentication: Secure login system for recruiters and administrators.
-
-Admin Dashboard: Provides insights and tools for managing resume screening parameters.
-
-Candidate Ranking: Ranks candidates based on criteria set by recruiters.
+The Resume Screening System is a Django-based web application designed to automate and streamline the recruitment process. It allows employers to securely upload candidate resumes, which are then parsed using natural language processing to extract key information such as skills, experience, and education. The system evaluates each resume based on criteria like relevant experience, collaboration, and adaptability, assigning scores that help rank candidates effectively. The platform features both user and admin login capabilities, and includes an admin dashboard for managing submissions and reviewing results. Supporting files such as class diagrams, use case diagrams, and user flow diagrams are included for clear system documentation. The application is easy to set up, requiring basic Python and Django dependencies, and can be run locally for development or demonstration purposes. This project is intended for educational use and provides a solid foundation for further enhancements in resume analytics or AI-driven recruitment tools.
